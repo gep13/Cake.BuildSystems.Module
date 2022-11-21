@@ -39,6 +39,15 @@ namespace Cake.Module.Shared
         /// <inheritdoc />
         public abstract void Write(CakeReport report);
 
+        /// <inheritdoc />
+        public abstract void WriteLifeCycleStep(string name, Verbosity verbosity);
+
+        /// <inheritdoc />
+        public abstract void WriteStep(string name, Verbosity verbosity);
+
+        /// <inheritdoc />
+        public abstract void WriteSkippedStep(string name, Verbosity verbosity);
+
         /// <summary>
         /// Writes the report to the <see cref="IConsole"/>.
         /// </summary>

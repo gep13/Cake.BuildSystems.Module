@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
         <IncludeBuildOutput>false</IncludeBuildOutput>
         <IsPackable>true</IsPackable>
         <IncludeSymbols>true</IncludeSymbols>
@@ -12,7 +12,6 @@
           auto-detection of ProjectType/Version will fail
         -->
         <CakeContribGuidelinesProjectType>module</CakeContribGuidelinesProjectType>
-        <CakeContribGuidelinesOverrideTargetFrameworkCakeVersion>2.0.0</CakeContribGuidelinesOverrideTargetFrameworkCakeVersion>
     </PropertyGroup>
 
     <PropertyGroup>
