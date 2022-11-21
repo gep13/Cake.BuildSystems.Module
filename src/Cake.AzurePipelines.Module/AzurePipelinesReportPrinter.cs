@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text;
 using Cake.Common.Build;
 using Cake.Core;
+using Cake.Core.Diagnostics;
 using Cake.Core.IO;
 using Cake.Module.Shared;
 using JetBrains.Annotations;
@@ -25,10 +26,7 @@ namespace Cake.AzurePipelines.Module
         {
         }
 
-        /// <summary>
-        /// Writes the specified report to a target.
-        /// </summary>
-        /// <param name="report">The report to write.</param>
+        /// <inheritdoc />
         public override void Write(CakeReport report)
         {
             if (report == null)
@@ -49,6 +47,24 @@ namespace Cake.AzurePipelines.Module
             {
                 _console.ResetColor();
             }
+        }
+
+        /// <inheritdoc />
+        public override void WriteStep(string name, Verbosity verbosity)
+        {
+            // Intentionally left blank
+        }
+
+        /// <inheritdoc />
+        public override void WriteLifeCycleStep(string name, Verbosity verbosity)
+        {
+            // Intentionally left blank
+        }
+
+        /// <inheritdoc />
+        public override void WriteSkippedStep(string name, Verbosity verbosity)
+        {
+            // Intentionally left blank
         }
 
         private void WriteToMarkdown(CakeReport report)

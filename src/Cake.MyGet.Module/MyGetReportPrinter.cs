@@ -50,6 +50,24 @@ namespace Cake.MyGet.Module
             }
         }
 
+        /// <inheritdoc />
+        public override void WriteStep(string name, Verbosity verbosity)
+        {
+            // Intentionally left blank
+        }
+
+        /// <inheritdoc />
+        public override void WriteLifeCycleStep(string name, Verbosity verbosity)
+        {
+            // Intentionally left blank
+        }
+
+        /// <inheritdoc />
+        public override void WriteSkippedStep(string name, Verbosity verbosity)
+        {
+            // Intentionally left blank
+        }
+
         private void WriteToBuildLog(CakeReport report)
         {
             var b = _context.MyGet();
