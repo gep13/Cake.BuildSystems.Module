@@ -12,6 +12,7 @@
           auto-detection of ProjectType/Version will fail
         -->
         <CakeContribGuidelinesProjectType>module</CakeContribGuidelinesProjectType>
+        <CakeContribGuidelinesOverrideTargetFrameworkCakeVersion>$(ReferencedCakeVersion)</CakeContribGuidelinesOverrideTargetFrameworkCakeVersion>
     </PropertyGroup>
 
     <PropertyGroup>

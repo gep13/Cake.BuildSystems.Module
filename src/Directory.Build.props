@@ -8,6 +8,7 @@
 
         <Copyright>Copyright © Alistair Chapman $(FullYear)</Copyright>
         <Product>Cake.BuildSystems.Module</Product>
+        <ReferencedCakeVersion>3.0.0</ReferencedCakeVersion>
     </PropertyGroup>
     <ItemGroup>
         <AdditionalFiles Include="$(SolutionDir)/stylecop.json" Link="stylecop.json" />
