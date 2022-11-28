@@ -27,8 +27,13 @@ namespace Cake.GitHubActions.Module
             _console = console;
             _engine.BeforeSetup += OnBeforeSetup;
             _engine.AfterSetup += OnAfterSetup;
+
             _engine.BeforeTaskSetup += OnBeforeTaskSetup;
+            _engine.AfterTaskSetup += OnAfterTaskSetup;
+
             _engine.BeforeTaskTeardown += OnBeforeTaskTeardown;
+            _engine.AfterTaskTeardown += OnAfterTaskTeardown;
+
             _engine.BeforeTeardown += OnBeforeBuildTeardown;
             _engine.AfterTeardown += OnAfterBuildTeardown;
         }
@@ -65,10 +70,24 @@ namespace Cake.GitHubActions.Module
 
         private void OnBeforeTaskSetup(object sender, BeforeTaskSetupEventArgs e)
         {
-            WriteStartBlock(e.TaskSetupContext.BuildSystem(), e.TaskSetupContext.Task.Name);
+            WriteStartBlock(e.TaskSetupContext.BuildSystem(), $"Task Setup: {e.TaskSetupContext.Task.Name}" );
+        }
+
+        private void OnAfterTaskSetup(object sender, AfterTaskSetupEventArgs e)
+        {
+            WriteEndBlock(e.TaskSetupContext.BuildSystem());
+
+            WriteStartBlock(e.TaskSetupContext.BuildSystem(), $"Task: {e.TaskSetupContext.Task.Name}");
         }
 
         private void OnBeforeTaskTeardown(object sender, BeforeTaskTeardownEventArgs e)
+        {
+            WriteEndBlock(e.TaskTeardownContext.BuildSystem());
+
+            WriteStartBlock(e.TaskTeardownContext.BuildSystem(), $"Task Teardown: {e.TaskTeardownContext.Task.Name}");
+        }
+
+        private void OnAfterTaskTeardown(object sender, AfterTaskTeardownEventArgs e)
         {
             WriteEndBlock(e.TaskTeardownContext.BuildSystem());
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -70,6 +71,12 @@ namespace Cake.GitHubActions.Module
             // Intentionally left blank
         }
 
+        private static TimeSpan GetTotalTime(IEnumerable<CakeReportEntry> entries)
+        {
+            return entries.Select(i => i.Duration)
+                .Aggregate(TimeSpan.Zero, (t1, t2) => t1 + t2);
+        }
+
         private void WriteToMarkdown(CakeReport report)
         {
             var includeSkippedReasonColumn = report.Any(r => !string.IsNullOrEmpty(r.SkippedMessage));
@@ -80,12 +87,12 @@ namespace Cake.GitHubActions.Module
             if (includeSkippedReasonColumn)
             {
                 sb.AppendLine("|Task|Duration|Skip Reason|");
-                sb.AppendLine("|:---|--------|----------:|");
+                sb.AppendLine("|----|--------|-----------|");
             }
             else
             {
                 sb.AppendLine("|Task|Duration|");
-                sb.AppendLine("|:---|-------:|");
+                sb.AppendLine("|----|--------|");
             }
 
             foreach (var item in report)
@@ -103,7 +110,16 @@ namespace Cake.GitHubActions.Module
                 }
             }
 
-            sb.AppendLine(string.Empty);
+            if (includeSkippedReasonColumn)
+            {
+                sb.AppendLine("||||");
+                sb.AppendLine(string.Format("|**_{0}_**|**_{1}_**||", "Total:", GetTotalTime(report)));
+            }
+            else
+            {
+                sb.AppendLine("|||");
+                sb.AppendLine(string.Format("|**_{0}_**|**_{1}_**|", "Total:", GetTotalTime(report)));
+            }
 
             _context.GitHubActions().Commands.SetStepSummary(sb.ToString());
         }
